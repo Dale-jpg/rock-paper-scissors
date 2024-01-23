@@ -6,8 +6,49 @@
     <title>Document</title>
 </head>
 <body>
+        <div id="gameDiv">
+            <h1 class="gameText" id="playerText">Player: </h1>
+            <h1 class="gameText" id="computerText">Computer: </h1>
+            <h1 class="gameText" id="resultText">Result: </h1>
+            <h1 class="gameText" id="playerScore">Player Score: </h1>
+            <h1 class="gameText" id="computerScore">Computer Score: </h1>
+            <h1 class="gameText" id="finalText">Winner after 5 wins: </h1>
+
+            <button class="choiceBtn">rock</button>
+            <button class="choiceBtn">paper</button>
+            <button class="choiceBtn">scissors</button>
+
+        </div>
     <script>
         // Your Javascript goes here!
+    const playerText = document.querySelector("#playerText");
+    const computerText = document.querySelector("#computerText");
+    const resultText = document.querySelector("#resultText");
+    const playerScoreText = document.querySelector("#playerScore");
+    const computerScoreText = document.querySelector("#computerScore");
+    const finalScoreText = document.querySelector("#finalText")
+
+    const choiceBtns = document.querySelectorAll(".choiceBtn");
+    let player;
+    let computer;
+    let result;
+
+    choiceBtns.forEach(button => button.addEventListener("click", () => {
+
+        player = button.textContent;
+        console.log(player);
+        getComputerChoice();
+        console.log(computer);
+        playerText.textContent = `Player: ${player}`;
+        computerText.textContent = `Computer: ${computer}`;
+        resultText.textContent = playRound();
+        let roundResult = playRound();
+        gameScore(roundResult);
+        playerScoreText.textContent = `Player Score: ${playerScore}`;
+        computerScoreText.textContent = `Computer Score: ${computerScore}`;
+
+    }))
+    
     let playerScore = 0
     let computerScore = 0
     let drawNumber = 0
@@ -19,24 +60,26 @@
         let randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
         console.log(randomNumber)
         if (randomNumber == 1) {
-            return "rock";
+            computer =  "rock";
         } else if (randomNumber == 2) {
-            return "paper";
+            computer = "paper";
         } else {
-            return "scissors";
+            computer =  "scissors";
         }
         }
 
+
     // Play one round
-    function playRound(playerSelection, computerSelection) {
-            console.log(computerSelection)
-            if (playerSelection == computerSelection) {
+    function playRound() {
+            console.log(player);
+            console.log(computer);
+            if (player == computer) {
                 return draw;
-            } else if (playerSelection == "rock" && computerSelection == "scissors") {
+            } else if (player == "rock" && computer == "scissors") {
                 return playerWinRound;
-            } else if (playerSelection == "paper" && computerSelection == "rock") {
+            } else if (player == "paper" && computer == "rock") {
                 return playerWinRound;
-            } else if (playerSelection == "scissors" && computerSelection == "paper") {
+            } else if (player == "scissors" && computer == "paper") {
                 return playerWinRound;
             } else {
                 return computerWinRound;
@@ -49,21 +92,6 @@
     let playerWinRound = "Player wins this round!"
     let computerWinRound = "Computer wins this round!"
 
-//For loop that plays multiple rounds
-    for (let i = 0; i < 5; i++) {
-    let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
-    const computerSelection = getComputerChoice();
-    let roundResult = playRound(playerSelection, computerSelection);
-    console.log(roundResult);
-    gameScore(roundResult);
-    console.log("Your score is " + playerScore);
-    console.log("The computer's score is " + computerScore);
-
-    if (playerScore === 5 || computerScore === 5) {
-        break;
-    }
-    }
-
     function gameScore(result) {
 
         if (result == playerWinRound) {
@@ -75,14 +103,13 @@
         }
 
         if (playerScore === 5) {
-        console.log(playerWin);
-        return;
+        return finalScoreText.textContent = playerWin;
         }
         if (computerScore === 5) {
-        console.log(computerWin);
-        return;
+            return finalScoreText.textContent = computerWin;
     }
     }
+
     </script>
 </body>
 </html>
