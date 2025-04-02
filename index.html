@@ -50,12 +50,16 @@
     console.log(getComputerChoice())
 
     function getHumanChoice() {
-        let humanChoice = prompt("Please enter your choice. rock, paper, or scisccors.",'')
+        let humanChoice = prompt("Please enter your choice. rock, paper, or scisccors.",'');
+        humanChoice = humanChoice.toLowerCase();
 
         return humanChoice;
     }
     console.log(getHumanChoice())
 
+    function playRound(computerChoice, humanChoice) {
+
+    }
 
     </script>
 </body>
