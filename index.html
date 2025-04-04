@@ -31,14 +31,13 @@
     
     let humanScore = 0;
     let computerScore = 0;
-    console.log(humanScore)
-    console.log(computerScore)
+    // console.log(humanScore)
+    // console.log(computerScore)
     let computerChoice;
     let humanChoice;
 
     function getComputerChoice(){
         let randomNumber = Math.random();
-        console.log(randomNumber)
         if (randomNumber < 0.3333) {
             computerChoice = "rock";
         } else if (randomNumber > 0.3333 && randomNumber < 0.6666) {
@@ -49,7 +48,7 @@
     
         return computerChoice;
     }
-    console.log(getComputerChoice())
+    
 
     function getHumanChoice() {
         humanChoice = prompt("Please enter your choice. rock, paper, or scissors.",'')
@@ -57,7 +56,6 @@
 
         return humanChoice;
     }
-    console.log(getHumanChoice())
 
     function playRound () {
         if (humanChoice == "rock" && computerChoice == "paper") {
@@ -86,9 +84,9 @@
     // const humanSelection = getHumanChoice();
     // const computerSelection = getComputerChoice();
 
-    playRound();
-    console.log(humanScore)
-    console.log(computerScore)
+    // playRound();
+    // console.log(humanScore)
+    // console.log(computerScore)
 
     // Write the logic to play the entire game
     // New function called playGame
@@ -97,11 +95,16 @@
     //
 
     function playGame() {
-        for (let i = 0; i < 5, i++) {
-            
+        for (let i = 0; i < 5; i++) {
+            getComputerChoice();
+            getHumanChoice();
+            playRound();
         }
     }
 
+    playGame();
+    console.log(humanScore)
+    console.log(computerScore)
     </script>
 </body>
 </html>
