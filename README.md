@@ -7,31 +7,40 @@ We’re going to make an implementation of grade-school classic “rock paper sc
 
 3. Your game is going to play against the computer, so begin with a function called getComputerChoice that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. We’ll use this function in the game to make the computer’s play. Tip: use the console to make sure this is returning the expected output before moving to the next step!
 
-4. Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters - the playerSelection and computerSelection - and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
-    4a. Make your function’s playerSelection parameter case-insensitive (so users can input rock, ROCK, RocK or any other variation).
-    
-    4b. Account for TIES by re-playing the round.
+4. Write the logic to get the human choice
+Your game will be played by a human player. You will write a function that takes the user choice and returns it.
 
-5. Important note: you want to return the results of this function call, not console.log() them. You’re going to use what you return later on, so let’s test this function by using console.log to see the results:
+Create a new function named getHumanChoice.
+Write the code so that getHumanChoice will return one of the valid choices depending on what the user inputs.
+Hint: Use the prompt method to get the user’s input.
+You do not need to handle reprompting if the user enters an invalid input, as that would require things we will teach later. For now, just assume the user will always enter a valid choice.
+Test what your function returns by using console.log.
+    
 
-    function playRound(playerSelection, computerSelection) {
-    // your code here!
-    }
-    
-    const playerSelection = "rock";
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
+5. Declare the players score variables
+Your game will keep track of the players score. You will write variables to keep track of the players score.
 
-6. Write a NEW function called game(). Use the previous function inside of this one to play a best-of-five game that keeps score and reports a winner or loser at the end.
-    6a. You have not officially learned how to “loop” over code to repeat function calls… if you already know about loops from somewhere else (or if you feel like doing some more learning) feel free to use them. If not, don’t worry! Just call your playRound function 5 times in a row. Loops are covered in the next lesson.
-    
-    6b. At this point you should be using console.log() to display the results of each round and the winner at the end.
-    
-    6c. Use prompt() to get input from the user. Read the docs here if you need to.
-    
-    6d. Feel free to re-work your previous functions if you need to. Specifically, you might want to change the return value to something more useful.
-    
-    6f. Feel free to create more “helper” functions if you think it would be useful.
+Create two new variables named humanScore and computerScore in the global scope.
+Initialize those variables with the value of 0.
+
+6. Write the logic to play a single round
+Your game will be played round by round. You will write a function that takes the human and computer player choices as arguments, plays a single round, increments the round winner’s score and logs a winner announcement.
+
+Create a new function named playRound.
+Define two parameters for playRound: humanChoice and computerChoice. Use these two parameters to take the human and computer choices as arguments.
+Make your function’s humanChoice parameter case-insensitive so that players can input “rock”, “ROCK”, “RocK”, or other variations.
+Write the code for your playRound function to console.log a string value representing the round winner, such as: “You lose! Paper beats Rock”.
+Increment the humanScore or computerScore variable based on the round winner.
+
+7. Write the logic to play the entire game
+Your game will play 5 rounds. You will write a function named playGame that calls playRound to play 5 rounds, keeps track of the scores and declares a winner at the end.
+
+Create a new function named playGame.
+Move your playRound function and score variables so that they’re declared inside of the new playGame function
+Play 5 rounds by calling playRound 5 times.
+Hint: When you assign a function call to a variable, the return value of that function is assigned to the variable. Accessing the variable afterward will only provide the assigned value; it doesn’t recall the function. You need to recall the choice functions to get new choices for each round.
+Re-work your previous functions or create more helper functions if necessary. Specifically, you may want to change the return values to something more useful.
+If you already know about loops, you can use them. If not, don’t worry! Loops will be covered in the next lesson.
 
 
 
