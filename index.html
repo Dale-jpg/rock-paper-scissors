@@ -7,14 +7,56 @@
 </head>
 <body>
 
-    <div>
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissors</button>
+    <div id="choice">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
     </div>
     <script>
         'use strict'
- 
+    
+        let divChoice = document.querySelector('#choice');
+
+        divChoice.addEventListener('click', (event) => {
+            let target = event.target;
+
+            switch(target.id) {
+                case 'rock':
+                    console.log("Rock button was clicked");
+                    humanChoice = "rock";
+                    getComputerChoice();
+                    playRound();
+                    console.log(computerChoice)
+                    console.log(humanChoice)
+                    console.log(humanScore)
+                    console.log(computerScore)
+                    break;
+                case 'paper':
+                    humanChoice = "paper";
+                    getComputerChoice();
+                    playRound();
+                    console.log(computerChoice)
+                    console.log(humanChoice)
+                    console.log(humanScore)
+                    console.log(computerScore)
+                    break;
+                case 'scissors':
+                    humanChoice = "scissors";
+                    getComputerChoice();
+                    playRound();
+                    console.log(computerChoice)
+                    console.log(humanChoice)
+                    console.log(humanScore)
+                    console.log(computerScore)
+                    break;
+            }
+        });
+
+        
+
+
+
+
     
     let humanScore = 0;
     let computerScore = 0;
@@ -37,12 +79,12 @@
     }
     
 
-    function getHumanChoice() {
-        humanChoice = prompt("Please enter your choice. rock, paper, or scissors.",'')
-        humanChoice = humanChoice.toLowerCase();
+    // function getHumanChoice() {
+    //     humanChoice = prompt("Please enter your choice. rock, paper, or scissors.",'')
+    //     humanChoice = humanChoice.toLowerCase();
 
-        return humanChoice;
-    }
+    //     return humanChoice;
+    // }
 
     function playRound () {
         if (humanChoice == "rock" && computerChoice == "paper") {
