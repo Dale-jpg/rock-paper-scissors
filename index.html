@@ -13,12 +13,22 @@
         <button id="scissors">Scissors</button>
     </div>
     <div id ="result">
-        <h1 class="resultText" id="roundResult"></h1>
+        <h1 class="resultText" id="roundResult">Result: </h1>
+        <h1 class="resultText" id="playerScore">Player Score: </h1>
+        <h1 class="resultText" id="computerScore">Computer Score: </h1>
+        <h1 class="resultText" id="finalText">Winner after 5 points: </h1>
     </div>
     <script>
         'use strict'
         
         const roundResult = document.querySelector("#roundResult");
+        const playerScoreText = document.querySelector('#playerScore');
+        const computerScoreText = document.querySelector('#computerScore');
+        const finalScoreText = document.querySelector('#finalText');
+        let humanScore = 0;
+        let computerScore = 0;
+        let computerChoice;
+        let humanChoice;
 
         let divChoice = document.querySelector('#choice');
 
@@ -60,16 +70,6 @@
         
 
 
-
-
-    
-    let humanScore = 0;
-    let computerScore = 0;
-    // console.log(humanScore)
-    // console.log(computerScore)
-    let computerChoice;
-    let humanChoice;
-
     function getComputerChoice(){
         let randomNumber = Math.random();
         if (randomNumber < 0.3333) {
@@ -83,14 +83,6 @@
         return computerChoice;
     }
     
-
-    // function getHumanChoice() {
-    //     humanChoice = prompt("Please enter your choice. rock, paper, or scissors.",'')
-    //     humanChoice = humanChoice.toLowerCase();
-
-    //     return humanChoice;
-    // }
-
     function playRound () {
         if (humanChoice == "rock" && computerChoice == "paper") {
             return "You lose! Paper beats Rock.";
@@ -115,18 +107,6 @@
         }
     }
 
-    // const humanSelection = getHumanChoice();
-    // const computerSelection = getComputerChoice();
-
-    // playRound();
-    // console.log(humanScore)
-    // console.log(computerScore)
-
-    // Write the logic to play the entire game
-    // New function called playGame
-    // New function playGame should be a loop for 5
-    // Move playRound function and score variables inside of playGame
-    //
 
 
     // Beginning ***** For now remove the logic that plays exactly five rounds. ******
