@@ -8,9 +8,9 @@
 <body>
 
     <div id="choice">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+        <button class="choiceBtn">rock</button>
+        <button class="choiceBtn">paper</button>
+        <button class="choiceBtn">scissors</button>
     </div>
     <div id ="result">
         <h1 class="resultText" id="roundResult">Result: </h1>
@@ -30,51 +30,24 @@
         let drawNumber = 0;
         let computerChoice;
         let humanChoice;
-        let roundResult;
         let computerWin;
         let humanWin;
-        let whoWonResult;
         let result;
 
-        let divChoice = document.querySelector('#choice');
+        const choiceBtns = document.querySelectorAll('.choiceBtn');
 
-        divChoice.addEventListener('click', (event) => {
-            let target = event.target;
-
-            switch(target.id) {
-                case 'rock':
-                    humanChoice = "rock";
-                    getComputerChoice();
-                    roundResultText.textContent = playRound();
-                    playRound();
-                    gameScore();
-                    humanScoreText.textContent = `Human Score: ${humanScore}`;
-                    computerScoreText.textContent = `Computer Score: ${computerScore}`;
-                    break;
-                case 'paper':
-                    humanChoice = "paper";
-                    getComputerChoice();
-                    roundResultText.textContent = playRound();
-                    roundResult = playRound();
-                    whoWon(roundResult)
-                    whoWonResult = whoWon();
-                    gameScore(whoWonResult);
-                    humanScoreText.textContent = `Human Score: ${humanScore}`;
-                    computerScoreText.textContent = `Computer Score: ${computerScore}`;
-                    break;
-                case 'scissors':
-                    humanChoice = "scissors";
-                    getComputerChoice();
-                    roundResultText.textContent = playRound();
-                    roundResult = playRound();
-                    whoWon(roundResult)
-                    whoWonResult = whoWon();
-                    gameScore(whoWonResult);
-                    humanScoreText.textContent = `Human Score: ${humanScore}`;
-                    computerScoreText.textContent = `Computer Score: ${computerScore}`;
-                    break;
-            }
-        });
+        choiceBtns.forEach(button => button.addEventListener("click", () => {
+            humanChoice = button.textContent;
+            console.log(humanChoice);
+            getComputerChoice();
+            console.log(computerChoice);
+            roundResultText.textContent = playRound();
+            let roundResult = playRound();
+            console.log(roundResult);
+            gameScore(roundResult);
+            humanScoreText.textContent = `Human Score: ${humanScore}`;
+            computerScoreText.textContent = `Computer Score: ${computerScore}`;
+        }))
 
         
 
@@ -120,36 +93,16 @@
         }
     }
 
-    // Current problem is roundResult is not being registered after playRound()
-    // Computer is always getting a score even when they shouldnt
-    // The problem may be playRound() is returning two variables
-    // Going to try and move the 2nd part into another function
-    function whoWon () {
-        if (roundResult == "You lose! Paper beats Rock." ) {
-            return computerWin;
-            console.log(roundResult);
-        } else if (roundResult == "You win! Rock beats Scissors.") {
-            return humanWin;
-            console.log(roundResult);
-        } else if (roundResult == "You win! Paper beats Rock.") {
-            return humanWin;
-            console.log(roundResult);
-        } else if (roundResult == "You lose! Scissors beats Paper.") {
-            return computerWin;
-            console.log(roundResult);
-        } else if (roundResult == "You lose! Rock beats Scissors") {
-            return computerWin;
-            console.log(roundResult);
-        } else if (roundResult == "You win! Scissors beats Rock") {
-            return humanWin;
-            console.log(roundResult);
-        } else {
-            return draw;
-            console.log(roundResult);
-        }
-    }
 
-    function gameScore() {
+    function gameScore(result) {
+        if (result == (loseRockPaper || losePaperScissors || loseScissorsRock)) {
+            computerScore++;
+        } else if (result == (winRockScissors || winPaperRock || winScissorsPaper)) {
+            humanScore++;
+        } else {
+            drawNumber++;
+        }
+
         if (humanScore === 5) {
             return finalScoreText.textContent = "Player wins the game!";
         }
