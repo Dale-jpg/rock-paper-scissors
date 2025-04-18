@@ -95,10 +95,18 @@
 
 
     function gameScore(result) {
-        if (result == (loseRockPaper || losePaperScissors || loseScissorsRock)) {
+        if (result == loseRockPaper) {
             computerScore++;
-        } else if (result == (winRockScissors || winPaperRock || winScissorsPaper)) {
-            humanScore++;
+        } else if (result == losePaperScissors) {
+            computerScore++;
+        } else if (result == loseScissorsRock) {
+            computerScore++;
+        } else if (result == winRockScissors) {
+            humanScore++
+        } else if (result == winPaperRock) {
+            humanScore++
+        } else if (result == winScissorsPaper) {
+            humanScore++
         } else {
             drawNumber++;
         }
