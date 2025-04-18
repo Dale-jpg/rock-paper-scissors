@@ -33,8 +33,8 @@
         let roundResult;
         let computerWin;
         let humanWin;
-        let draw;
         let whoWonResult;
+        let result;
 
         let divChoice = document.querySelector('#choice');
 
@@ -46,10 +46,8 @@
                     humanChoice = "rock";
                     getComputerChoice();
                     roundResultText.textContent = playRound();
-                    roundResult = playRound();
-                    whoWon(roundResult)
-                    whoWonResult = whoWon();
-                    gameScore(roundResult);
+                    playRound();
+                    gameScore();
                     humanScoreText.textContent = `Human Score: ${humanScore}`;
                     computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
@@ -57,7 +55,10 @@
                     humanChoice = "paper";
                     getComputerChoice();
                     roundResultText.textContent = playRound();
-                    gameScore(roundResult);
+                    roundResult = playRound();
+                    whoWon(roundResult)
+                    whoWonResult = whoWon();
+                    gameScore(whoWonResult);
                     humanScoreText.textContent = `Human Score: ${humanScore}`;
                     computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
@@ -65,7 +66,10 @@
                     humanChoice = "scissors";
                     getComputerChoice();
                     roundResultText.textContent = playRound();
-                    gameScore(roundResult);
+                    roundResult = playRound();
+                    whoWon(roundResult)
+                    whoWonResult = whoWon();
+                    gameScore(whoWonResult);
                     humanScoreText.textContent = `Human Score: ${humanScore}`;
                     computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
@@ -88,28 +92,31 @@
         return computerChoice;
     }
     
+    let loseRockPaper = "You lose! Paper beats Rock.";
+    let winRockScissors = "You win! Rock beats Scissors.";
+    let winPaperRock = "You win! Paper beats Rock.";
+    let losePaperScissors = "You lose! Scissors beats Paper.";
+    let loseScissorsRock = "You lose! Rock beats Scissors.";
+    let winScissorsPaper = "You win! Scissors beats Paper."
+    let draw = "It's a draw! Play again";
+
+
+
     function playRound () {
         if (humanChoice == "rock" && computerChoice == "paper") {
-            return "You lose! Paper beats Rock.";
-            roundResult == computerWin;
+            return loseRockPaper;
         } else if (humanChoice == "rock" && computerChoice  == "scissors") {
-            return "You win! Rock beats Scissors.";
-            roundResult == humanWin;
+            return winRockScissors;
         } else if (humanChoice == "paper" && computerChoice == "rock") {
-            return "You win! Paper beats Rock.";
-            roundResult == humanWin;
+            return winPaperRock;
         } else if (humanChoice == "paper" && computerChoice == "scissors") {
-            return "You lose! Scissors beats Paper.";
-            roundResult = computerWin;
+            return losePaperScissors;
         } else if (humanChoice == "scissors" && computerChoice == "rock") {
-            return "You lose! Rock beats Scissors";
-            roundResult = computerWin;
+            return loseScissorsRock;
         } else if (humanChoice == "scissors" && computerChoice == "paper") {
-            return "You win! Scissors beats Rock";
-            roundResult = humanWin;
+            return winScissorsPaper;
         } else {
-            return "It's a draw! Play again";
-            roundResult = draw;
+            return draw;
         }
     }
 
@@ -119,31 +126,30 @@
     // Going to try and move the 2nd part into another function
     function whoWon () {
         if (roundResult == "You lose! Paper beats Rock." ) {
-            roundResult == computerWin;
+            return computerWin;
+            console.log(roundResult);
         } else if (roundResult == "You win! Rock beats Scissors.") {
-            roundResult == humanWin;
+            return humanWin;
+            console.log(roundResult);
         } else if (roundResult == "You win! Paper beats Rock.") {
-            roundResult == humanWin;
+            return humanWin;
+            console.log(roundResult);
         } else if (roundResult == "You lose! Scissors beats Paper.") {
-            roundResult = computerWin;
+            return computerWin;
+            console.log(roundResult);
         } else if (roundResult == "You lose! Rock beats Scissors") {
-            roundResult = computerWin;
+            return computerWin;
+            console.log(roundResult);
         } else if (roundResult == "You win! Scissors beats Rock") {
-            roundResult = humanWin;
+            return humanWin;
+            console.log(roundResult);
         } else {
-            roundResult = draw;
+            return draw;
+            console.log(roundResult);
         }
     }
 
     function gameScore() {
-        if (roundResult == computerWin) {
-            computerScore++;
-        } else if (roundResult == humanWin) {
-            humanScore++;
-        } else {
-            drawNumber++;
-        }
-
         if (humanScore === 5) {
             return finalScoreText.textContent = "Player wins the game!";
         }
