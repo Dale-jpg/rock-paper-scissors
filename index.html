@@ -95,24 +95,16 @@
 
 
     function gameScore(result) {
-        if (result == loseRockPaper) {
+        if (result == (loseRockPaper || losePaperScissors || loseScissorsRock)) {
             computerScore++;
-        } else if (result == losePaperScissors) {
-            computerScore++;
-        } else if (result == loseScissorsRock) {
-            computerScore++;
-        } else if (result == winRockScissors) {
-            humanScore++
-        } else if (result == winPaperRock) {
-            humanScore++
-        } else if (result == winScissorsPaper) {
-            humanScore++
+        } else if (result == (winRockScissors || winPaperRock || winScissorsPaper)) {
+            humanScore++;
         } else {
             drawNumber++;
         }
 
         if (humanScore === 5) {
-            return finalScoreText.textContent = "Player wins the game!";
+            return finalScoreText.textContent = "Human wins the game!";
         }
         if (computerScore ===5 ) {
             return finalScoreText.textContent = "Computer wins the game"
