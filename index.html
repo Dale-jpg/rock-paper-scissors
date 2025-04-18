@@ -6,35 +6,51 @@
     <title>Document</title>
 </head>
 <body>
+
+    <div id="choice">
+        <button class="choiceBtn">rock</button>
+        <button class="choiceBtn">paper</button>
+        <button class="choiceBtn">scissors</button>
+    </div>
+    <div id ="result">
+        <h1 class="resultText" id="roundResult">Result: </h1>
+        <h1 class="resultText" id="humanScore">Human Score: </h1>
+        <h1 class="resultText" id="computerScore">Computer Score: </h1>
+        <h1 class="resultText" id="finalText">Winner after 5 points: </h1>
+    </div>
     <script>
         'use strict'
-    // pseudocode
-    // Create function to get computer's choice
-    // Can use math.random to get a random number between 0 and 1
-    // Could do rock is less than 0.3333
-    // Paper is greater than 0.3333 and less than 0.6666
-    // Scissors is greater than 0.6666
-    // 
-    // Create function to get human choice
-    // Use prompt method and assume input will be valid
-    // 
-    // Declare the player score variables
-    // Make sure to initialize values to 0 for the two variables
-    //
-    //Write the logic to play a single round
-    //
-    // Write the logic to play the entire game
+        
+        const roundResultText = document.querySelector("#roundResult");
+        const humanScoreText = document.querySelector('#humanScore');
+        const computerScoreText = document.querySelector('#computerScore');
+        const finalScoreText = document.querySelector('#finalText');
+        let humanScore = 0;
+        let computerScore = 0;
+        let drawNumber = 0;
+        let computerChoice;
+        let humanChoice;
+        let computerWin;
+        let humanWin;
+        let result;
 
+        const choiceBtns = document.querySelectorAll('.choiceBtn');
 
-    //Approach each small problem and not the big problem
-    //Code below this line ------------------------
-    
-    let humanScore = 0;
-    let computerScore = 0;
-    // console.log(humanScore)
-    // console.log(computerScore)
-    let computerChoice;
-    let humanChoice;
+        choiceBtns.forEach(button => button.addEventListener("click", () => {
+            humanChoice = button.textContent;
+            console.log(humanChoice);
+            getComputerChoice();
+            console.log(computerChoice);
+            roundResultText.textContent = playRound();
+            let roundResult = playRound();
+            console.log(roundResult);
+            gameScore(roundResult);
+            humanScoreText.textContent = `Human Score: ${humanScore}`;
+            computerScoreText.textContent = `Computer Score: ${computerScore}`;
+        }))
+
+        
+
 
     function getComputerChoice(){
         let randomNumber = Math.random();
@@ -49,62 +65,52 @@
         return computerChoice;
     }
     
+    let loseRockPaper = "You lose! Paper beats Rock.";
+    let winRockScissors = "You win! Rock beats Scissors.";
+    let winPaperRock = "You win! Paper beats Rock.";
+    let losePaperScissors = "You lose! Scissors beats Paper.";
+    let loseScissorsRock = "You lose! Rock beats Scissors.";
+    let winScissorsPaper = "You win! Scissors beats Paper."
+    let draw = "It's a draw! Play again";
 
-    function getHumanChoice() {
-        humanChoice = prompt("Please enter your choice. rock, paper, or scissors.",'')
-        humanChoice = humanChoice.toLowerCase();
 
-        return humanChoice;
-    }
 
     function playRound () {
         if (humanChoice == "rock" && computerChoice == "paper") {
-            console.log("You lose! Paper beats Rock.");
-            computerScore = computerScore + 1;
+            return loseRockPaper;
         } else if (humanChoice == "rock" && computerChoice  == "scissors") {
-            console.log("You win! Rock beats Scissors.");
-            humanScore = humanScore + 1;
+            return winRockScissors;
         } else if (humanChoice == "paper" && computerChoice == "rock") {
-            console.log("You win! Paper beats Rock.");
-            humanScore = humanScore + 1;
+            return winPaperRock;
         } else if (humanChoice == "paper" && computerChoice == "scissors") {
-            console.log("You lose! Scissors beats Paper.");
-            computerScore = computerScore + 1;
+            return losePaperScissors;
         } else if (humanChoice == "scissors" && computerChoice == "rock") {
-            console.log("You lose! Rock beats Scissors");
-            computerScore = computerScore + 1;
+            return loseScissorsRock;
         } else if (humanChoice == "scissors" && computerChoice == "paper") {
-            console.log("You win! Scissors beats Rock");
-            humanScore = humanScore + 1;
+            return winScissorsPaper;
         } else {
-            console.log("It's a draw! Play again");
+            return draw;
         }
     }
 
-    // const humanSelection = getHumanChoice();
-    // const computerSelection = getComputerChoice();
 
-    // playRound();
-    // console.log(humanScore)
-    // console.log(computerScore)
+    function gameScore(result) {
+        if (result == (loseRockPaper || losePaperScissors || loseScissorsRock)) {
+            computerScore++;
+        } else if (result == (winRockScissors || winPaperRock || winScissorsPaper)) {
+            humanScore++;
+        } else {
+            drawNumber++;
+        }
 
-    // Write the logic to play the entire game
-    // New function called playGame
-    // New function playGame should be a loop for 5
-    // Move playRound function and score variables inside of playGame
-    //
-
-    function playGame() {
-        for (let i = 0; i < 5; i++) {
-            getComputerChoice();
-            getHumanChoice();
-            playRound();
+        if (humanScore === 5) {
+            return finalScoreText.textContent = "Player wins the game!";
+        }
+        if (computerScore ===5 ) {
+            return finalScoreText.textContent = "Computer wins the game"
         }
     }
 
-    playGame();
-    console.log(humanScore)
-    console.log(computerScore)
     </script>
 </body>
 </html>
