@@ -14,21 +14,26 @@
     </div>
     <div id ="result">
         <h1 class="resultText" id="roundResult">Result: </h1>
-        <h1 class="resultText" id="playerScore">Player Score: </h1>
+        <h1 class="resultText" id="humanScore">Human Score: </h1>
         <h1 class="resultText" id="computerScore">Computer Score: </h1>
         <h1 class="resultText" id="finalText">Winner after 5 points: </h1>
     </div>
     <script>
         'use strict'
         
-        const roundResult = document.querySelector("#roundResult");
-        const playerScoreText = document.querySelector('#playerScore');
+        const roundResultText = document.querySelector("#roundResult");
+        const humanScoreText = document.querySelector('#humanScore');
         const computerScoreText = document.querySelector('#computerScore');
         const finalScoreText = document.querySelector('#finalText');
         let humanScore = 0;
         let computerScore = 0;
+        let drawNumber = 0;
         let computerChoice;
         let humanChoice;
+        let roundResult;
+        let computerWin;
+        let humanWin;
+        let draw;
 
         let divChoice = document.querySelector('#choice');
 
@@ -37,32 +42,28 @@
 
             switch(target.id) {
                 case 'rock':
-                    console.log("Rock button was clicked");
                     humanChoice = "rock";
                     getComputerChoice();
-                    roundResult.textContent = playRound();
-                    console.log(computerChoice)
-                    console.log(humanChoice)
-                    console.log(humanScore)
-                    console.log(computerScore)
+                    roundResultText.textContent = playRound();
+                    gameScore(roundResult);
+                    humanScoreText.textContent = `Player Score: ${humanScore}`;
+                    computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
                 case 'paper':
                     humanChoice = "paper";
                     getComputerChoice();
-                    roundResult.textContent = playRound();
-                    console.log(computerChoice)
-                    console.log(humanChoice)
-                    console.log(humanScore)
-                    console.log(computerScore)
+                    roundResultText.textContent = playRound();
+                    gameScore(roundResult);
+                    humanScoreText.textContent = `Player Score: ${humanScore}`;
+                    computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
                 case 'scissors':
                     humanChoice = "scissors";
                     getComputerChoice();
-                    roundResult.textContent = playRound();
-                    console.log(computerChoice)
-                    console.log(humanChoice)
-                    console.log(humanScore)
-                    console.log(computerScore)
+                    roundResultText.textContent = playRound();
+                    gameScore(roundResult);
+                    humanScoreText.textContent = `Player Score: ${humanScore}`;
+                    computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
             }
         });
@@ -86,44 +87,45 @@
     function playRound () {
         if (humanChoice == "rock" && computerChoice == "paper") {
             return "You lose! Paper beats Rock.";
-            // computerScore = computerScore + 1;
+            roundResult == computerWin;
         } else if (humanChoice == "rock" && computerChoice  == "scissors") {
             return "You win! Rock beats Scissors.";
-            // humanScore = humanScore + 1;
+            roundResult == humanWin;
         } else if (humanChoice == "paper" && computerChoice == "rock") {
             return "You win! Paper beats Rock.";
-            // humanScore = humanScore + 1;
+            roundResult == humanWin;
         } else if (humanChoice == "paper" && computerChoice == "scissors") {
             return "You lose! Scissors beats Paper.";
-            // computerScore = computerScore + 1;
+            roundResult = computerWin;
         } else if (humanChoice == "scissors" && computerChoice == "rock") {
             return "You lose! Rock beats Scissors";
-            // computerScore = computerScore + 1;
+            roundResult = computerWin;
         } else if (humanChoice == "scissors" && computerChoice == "paper") {
             return "You win! Scissors beats Rock";
-            // humanScore = humanScore + 1;
+            roundResult = humanWin;
         } else {
             return "It's a draw! Play again";
+            roundResult = draw;
         }
     }
 
+    function gameScore() {
+        if (roundResult == computerWin) {
+            computerScore++;
+        } else if (roundResult == humanWin) {
+            humanScore++;
+        } else {
+            drawNumber++;
+        }
 
+        if (humanScore === 5) {
+            return finalScoreText.textContent = "Player wins the game!";
+        }
+        if (computerScore ===5 ) {
+            return finalScoreText.textContent = "Computer wins the game"
+        }
+    }
 
-    // Beginning ***** For now remove the logic that plays exactly five rounds. ******
-
-    // function playGame() {
-    //     for (let i = 0; i < 5; i++) {
-    //         getComputerChoice();
-    //         getHumanChoice();
-    //         playRound();
-    //     }
-    // }
-
-    // playGame();
-    // console.log(humanScore)
-    // console.log(computerScore)
-
-    // End ***** For now remove the logic that plays exactly five rounds. ******
     </script>
 </body>
 </html>
