@@ -34,6 +34,7 @@
         let computerWin;
         let humanWin;
         let draw;
+        let whoWonResult;
 
         let divChoice = document.querySelector('#choice');
 
@@ -45,8 +46,11 @@
                     humanChoice = "rock";
                     getComputerChoice();
                     roundResultText.textContent = playRound();
+                    roundResult = playRound();
+                    whoWon(roundResult)
+                    whoWonResult = whoWon();
                     gameScore(roundResult);
-                    humanScoreText.textContent = `Player Score: ${humanScore}`;
+                    humanScoreText.textContent = `Human Score: ${humanScore}`;
                     computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
                 case 'paper':
@@ -54,7 +58,7 @@
                     getComputerChoice();
                     roundResultText.textContent = playRound();
                     gameScore(roundResult);
-                    humanScoreText.textContent = `Player Score: ${humanScore}`;
+                    humanScoreText.textContent = `Human Score: ${humanScore}`;
                     computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
                 case 'scissors':
@@ -62,7 +66,7 @@
                     getComputerChoice();
                     roundResultText.textContent = playRound();
                     gameScore(roundResult);
-                    humanScoreText.textContent = `Player Score: ${humanScore}`;
+                    humanScoreText.textContent = `Human Score: ${humanScore}`;
                     computerScoreText.textContent = `Computer Score: ${computerScore}`;
                     break;
             }
@@ -105,6 +109,28 @@
             roundResult = humanWin;
         } else {
             return "It's a draw! Play again";
+            roundResult = draw;
+        }
+    }
+
+    // Current problem is roundResult is not being registered after playRound()
+    // Computer is always getting a score even when they shouldnt
+    // The problem may be playRound() is returning two variables
+    // Going to try and move the 2nd part into another function
+    function whoWon () {
+        if (roundResult == "You lose! Paper beats Rock." ) {
+            roundResult == computerWin;
+        } else if (roundResult == "You win! Rock beats Scissors.") {
+            roundResult == humanWin;
+        } else if (roundResult == "You win! Paper beats Rock.") {
+            roundResult == humanWin;
+        } else if (roundResult == "You lose! Scissors beats Paper.") {
+            roundResult = computerWin;
+        } else if (roundResult == "You lose! Rock beats Scissors") {
+            roundResult = computerWin;
+        } else if (roundResult == "You win! Scissors beats Rock") {
+            roundResult = humanWin;
+        } else {
             roundResult = draw;
         }
     }
