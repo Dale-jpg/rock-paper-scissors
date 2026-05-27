@@ -47,8 +47,6 @@
             gameScore(roundResult);
             humanScoreText.textContent = `Human Score: ${humanScore}`;
             computerScoreText.textContent = `Computer Score: ${computerScore}`;
-            console.log(humanScore);
-            console.log(computerScore);
         }))
 
         
@@ -97,9 +95,9 @@
 
 
     function gameScore(result) {
-        if (result == loseRockPaper || losePaperScissors || loseScissorsRock) {
+        if ((result == loseRockPaper) || (result == losePaperScissors) || (result == loseScissorsRock)) {
             computerScore++;
-        } else if (result == winRockScissors || winPaperRock || winScissorsPaper) {
+        } else if ((result == winRockScissors) || (result == winPaperRock) || (result = winScissorsPaper)) {
             humanScore++;
         } else {
             drawNumber++;
@@ -108,7 +106,7 @@
         if (humanScore === 5) {
             return finalScoreText.textContent = "Human wins the game!";
         }
-        if (computerScore ===5 ) {
+        if (computerScore === 5 ) {
             return finalScoreText.textContent = "Computer wins the game"
         }
     }
