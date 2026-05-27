@@ -76,17 +76,17 @@
 
 
     function playRound () {
-        if (humanChoice == "rock" && computerChoice == "paper") {
+        if (humanChoice === "rock" && computerChoice === "paper") {
             return loseRockPaper;
-        } else if (humanChoice == "rock" && computerChoice  == "scissors") {
+        } else if (humanChoice === "rock" && computerChoice  === "scissors") {
             return winRockScissors;
-        } else if (humanChoice == "paper" && computerChoice == "rock") {
+        } else if (humanChoice === "paper" && computerChoice === "rock") {
             return winPaperRock;
-        } else if (humanChoice == "paper" && computerChoice == "scissors") {
+        } else if (humanChoice === "paper" && computerChoice === "scissors") {
             return losePaperScissors;
-        } else if (humanChoice == "scissors" && computerChoice == "rock") {
+        } else if (humanChoice === "scissors" && computerChoice === "rock") {
             return loseScissorsRock;
-        } else if (humanChoice == "scissors" && computerChoice == "paper") {
+        } else if (humanChoice === "scissors" && computerChoice === "paper") {
             return winScissorsPaper;
         } else {
             return draw;
@@ -95,9 +95,9 @@
 
 
     function gameScore(result) {
-        if ((result == loseRockPaper) || (result == losePaperScissors) || (result == loseScissorsRock)) {
+        if ((result === loseRockPaper) || (result === losePaperScissors) || (result === loseScissorsRock)) {
             computerScore++;
-        } else if ((result == winRockScissors) || (result == winPaperRock) || (result = winScissorsPaper)) {
+        } else if ((result === winRockScissors) || (result === winPaperRock) || (result === winScissorsPaper)) {
             humanScore++;
         } else {
             drawNumber++;
